@@ -93,6 +93,8 @@ body {
     z-index: 2;
 }
 
+
+
 .archive-title-section {
     text-align: center;
     margin-bottom: var(--space-xl);
@@ -816,12 +818,14 @@ body {
         
         /* 基础样式重置 */
         body {
-            background: white;
+            background: var(--archive-paper);
             padding: 0;
             margin: 0;
             font-family: var(--font-serif);
             font-size: 12pt;
             line-height: 1.5;
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
         }
         
         /* 隐藏所有UI元素 */
@@ -846,6 +850,9 @@ body {
             max-width: 100% !important;
             width: 100% !important;
             height: 100% !important;
+            background: var(--archive-paper) !important;
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
         }
         
         /* 垂直堆叠表格打印样式 - 确保每页一个表格 */
@@ -870,11 +877,17 @@ body {
             padding: 0 !important;
             display: block;
             position: relative;
+            background: var(--archive-paper) !important;
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
         }
         
-        /* 最后一页不添加分页符 */
+        /* 最后一页不添加分页符，但保持背景颜色 */
         .table-section:last-child {
             page-break-after: avoid !important;
+            background: var(--archive-paper) !important;
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
         }
         
         /* 表格容器 - 填满可用空间 */

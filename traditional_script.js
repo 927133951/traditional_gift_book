@@ -384,6 +384,154 @@ class GiftArchive {
         });
         
         document.getElementById('createDate').textContent = chineseDate;
+        this.updateTraditionalDate();
+    }
+    
+    // 更新传统日期（包含时辰、年份生肖、月份生肖、日期生肖）
+    updateTraditionalDate() {
+        try {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1; // 月份从0开始，需要+1
+            const day = today.getDate();
+            
+            // 获取中文数字年份（简化格式，如2025显示为二〇二五）
+            const chineseYear = this.numberToChinese(year);
+            
+            // 获取当前时辰
+            const hour = this.getTimeHour(today);
+            
+            // 获取年份所属生肖
+            const yearZodiac = this.getZodiac(year);
+            
+            // 获取月份所属生肖（月份地支对应的生肖）
+            const monthZodiac = this.getMonthZodiac(month);
+            
+            // 获取日期所属生肖（日期地支对应的生肖）
+            const dayZodiac = this.getDayZodiac(year, month, day);
+            
+            // 更新页面显示（严格遵循"年份 生肖年 生肖月 生肖日 时辰"的顺序）
+            const subtitleElement = document.querySelector('.archive-subtitle');
+            if (subtitleElement) {
+                subtitleElement.textContent = `${chineseYear}年 ${yearZodiac}年 ${monthZodiac}月 ${dayZodiac}日 ${hour}`;
+            }
+        } catch (error) {
+            console.error('更新传统日期失败:', error);
+            // 错误处理：使用默认显示
+            const subtitleElement = document.querySelector('.archive-subtitle');
+            if (subtitleElement) {
+                subtitleElement.textContent = `${new Date().getFullYear()}年`;
+            }
+        }
+    }
+    
+    // 数字转中文（简化格式，如2025显示为二〇二五）
+    numberToChinese(num) {
+        const chineseDigits = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+        
+        if (num === 0) return '〇';
+        
+        let str = num.toString();
+        let result = '';
+        
+        for (let i = 0; i < str.length; i++) {
+            const digit = parseInt(str[i]);
+            result += chineseDigits[digit];
+        }
+        
+        return result;
+    }
+    
+    // 获取干支纪年
+    getGanZhi(year) {
+        // 天干
+        const tiangan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        // 地支
+        const dizhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+        
+        // 计算天干：(年份 - 4) % 10
+        const tgIndex = (year - 4) % 10;
+        // 计算地支：(年份 - 4) % 12
+        const dzIndex = (year - 4) % 12;
+        
+        return tiangan[tgIndex] + dizhi[dzIndex];
+    }
+    
+    // 获取生肖
+    getZodiac(year) {
+        const zodiacs = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+        // 计算生肖：(年份 - 4) % 12
+        const zodiacIndex = (year - 4) % 12;
+        return zodiacs[zodiacIndex];
+    }
+    
+    // 获取月份所属生肖（月份地支对应的生肖）
+    getMonthZodiac(month) {
+        // 月份对应的地支和生肖
+        const monthZodiacs = [
+            { month: 1, zodiac: '虎' },
+            { month: 2, zodiac: '兔' },
+            { month: 3, zodiac: '龙' },
+            { month: 4, zodiac: '蛇' },
+            { month: 5, zodiac: '马' },
+            { month: 6, zodiac: '羊' },
+            { month: 7, zodiac: '猴' },
+            { month: 8, zodiac: '鸡' },
+            { month: 9, zodiac: '狗' },
+            { month: 10, zodiac: '猪' },
+            { month: 11, zodiac: '鼠' },
+            { month: 12, zodiac: '牛' }
+        ];
+        
+        const monthInfo = monthZodiacs.find(item => item.month === month);
+        return monthInfo ? monthInfo.zodiac : '鼠'; // 默认返回鼠
+    }
+    
+    // 获取日期所属生肖（日期地支对应的生肖）
+    getDayZodiac(year, month, day) {
+        // 简化实现：使用日期对12取模来计算生肖
+        // 更准确的实现需要计算当天的干支，但这需要复杂的天文算法
+        // 这里使用简化的计算方式
+        const zodiacs = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+        
+        // 使用日期作为基础，加上月份和年份的影响来计算
+        const dayCode = year + month + day;
+        const zodiacIndex = dayCode % 12;
+        
+        return zodiacs[zodiacIndex];
+    }
+    
+    // 获取当前时辰
+    getTimeHour(date) {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const totalMinutes = hours * 60 + minutes;
+        
+        // 时辰对应表（每两小时一个时辰）
+        const timeHours = [
+            { name: '子时', start: 0, end: 120 },
+            { name: '丑时', start: 120, end: 240 },
+            { name: '寅时', start: 240, end: 360 },
+            { name: '卯时', start: 360, end: 480 },
+            { name: '辰时', start: 480, end: 600 },
+            { name: '巳时', start: 600, end: 720 },
+            { name: '午时', start: 720, end: 840 },
+            { name: '未时', start: 840, end: 960 },
+            { name: '申时', start: 960, end: 1080 },
+            { name: '酉时', start: 1080, end: 1200 },
+            { name: '戌时', start: 1200, end: 1320 },
+            { name: '亥时', start: 1320, end: 1440 }
+        ];
+        
+        // 查找当前时辰
+        for (const timeHour of timeHours) {
+            if (totalMinutes >= timeHour.start && totalMinutes < timeHour.end) {
+                return timeHour.name;
+            }
+        }
+        
+        // 默认返回子时
+        return '子时';
     }
 
     // 新增一页 - 修复版本
@@ -700,6 +848,14 @@ class GiftArchive {
 let giftArchive;
 document.addEventListener('DOMContentLoaded', () => {
     giftArchive = new GiftArchive();
+    
+    // 立即更新传统日期
+    giftArchive.updateTraditionalDate();
+    
+    // 每分钟更新一次时辰
+    setInterval(() => {
+        giftArchive.updateTraditionalDate();
+    }, 60000);
 });
 
 // 全局函数
