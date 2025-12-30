@@ -1,0 +1,1133 @@
+/* 数字遗产档案风格 - 礼薄书样式 */
+
+/* CSS重置与基础设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 古籍色彩系统 */
+    --archive-paper: #F5F1E8;
+    --archive-paper-dark: #E8E2D5;
+    --ink-primary: #2C2C2C;
+    --ink-secondary: #4A4A4A;
+    --seal-red: #C8102E;
+    --bronze-border: #4A5D23;
+    --gold-accent: #D4AF37;
+    --shadow-light: rgba(44, 44, 44, 0.1);
+    --shadow-medium: rgba(44, 44, 44, 0.2);
+    
+    /* 古籍字体系统 */
+    --font-serif: 'Noto Serif SC', serif;
+    --font-sans: 'Noto Sans SC', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', monospace;
+    --font-handwriting: 'Ma Shan Zheng', cursive;
+    
+    /* 古籍网格系统 */
+    --grid-columns: 12;
+    --grid-gap: 24px;
+    --container-max-width: 1200px;
+    --content-padding: 40px;
+    
+    /* 古籍间距系统 */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+    
+    /* 古籍边框系统 */
+    --border-thin: 1px;
+    --border-medium: 2px;
+    --border-thick: 3px;
+    --border-radius: 0;
+}
+
+body {
+    font-family: var(--font-serif);
+    background: linear-gradient(135deg, var(--archive-paper) 0%, var(--archive-paper-dark) 100%);
+    color: var(--ink-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: var(--space-lg);
+}
+
+/* 档案容器 */
+.archive-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    background: var(--archive-paper);
+    border: var(--border-medium) solid var(--bronze-border);
+    box-shadow: 
+        0 8px 32px var(--shadow-light),
+        0 2px 8px var(--shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 古籍纸张纹理效果 */
+.archive-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(200, 16, 46, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='paper-texture'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' result='noise'/%3E%3CfeColorMatrix in='noise' type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' in2='noise' mode='multiply'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' filter='url(%23paper-texture)' opacity='0.4'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 档案页眉 */
+.archive-header {
+    padding: var(--space-xxl) var(--content-padding) var(--space-xl);
+    border-bottom: var(--border-thin) solid var(--bronze-border);
+    position: relative;
+    z-index: 2;
+}
+
+.archive-title-section {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.archive-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--seal-red);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 4px var(--shadow-light);
+    position: relative;
+}
+
+.archive-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+}
+
+.archive-subtitle {
+    font-size: 1.1rem;
+    color: var(--ink-secondary);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+/* 档案元信息 */
+.archive-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.3);
+    border: var(--border-thin) solid var(--bronze-border);
+    border-radius: 2px;
+}
+
+.meta-label {
+    font-weight: 600;
+    color: var(--ink-primary);
+    min-width: 80px;
+    font-size: 0.9rem;
+}
+
+.meta-value {
+    font-family: var(--font-mono);
+    color: var(--ink-secondary);
+    font-size: 0.9rem;
+}
+
+.meta-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--ink-primary);
+    padding: var(--space-xs);
+    border-bottom: var(--border-thin) solid var(--bronze-border);
+    transition: border-color 0.3s ease;
+}
+
+.meta-input:focus {
+    outline: none;
+    border-bottom-color: var(--seal-red);
+}
+
+/* 主内容区域 */
+.archive-content {
+    padding: var(--content-padding);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 记录表格 */
+.record-table-container {
+    overflow-x: auto;
+    margin-bottom: var(--space-xl);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.record-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--archive-paper);
+    box-shadow: 0 4px 16px var(--shadow-light);
+    table-layout: fixed;
+}
+
+.record-table th,
+.record-table td {
+    padding: var(--space-md);
+    text-align: left;
+    border: var(--border-thin) solid var(--bronze-border);
+    vertical-align: middle;
+}
+
+.record-table th {
+    background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
+    font-weight: 600;
+    color: var(--ink-primary);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    position: relative;
+}
+
+.record-table th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold-accent);
+}
+
+.record-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.record-table tbody tr:hover {
+    background: rgba(200, 16, 46, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.record-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 表格列宽设置 - 确保总和为100% */
+.col-name { width: 25%; min-width: 150px; }
+.col-amount-capital { width: 35%; min-width: 200px; }
+.col-amount { width: 15%; min-width: 120px; }
+.col-gift { width: 25%; min-width: 150px; }
+
+/* 手写行楷体样式 - 所有用户输入 */
+.record-table input,
+.meta-input,
+.signature-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: var(--font-handwriting);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-primary);
+    padding: var(--space-xs);
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.record-table input:focus,
+.meta-input:focus,
+.signature-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 3px var(--shadow-light);
+    border-bottom: 2px solid var(--seal-red);
+}
+
+/* 档案页脚 */
+.archive-footer {
+    padding: var(--space-lg) var(--content-padding);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* 横向统计区域 */
+.footer-stats-horizontal {
+    display: flex;
+    gap: var(--space-xxl);
+    align-items: center;
+}
+
+.stat-item-large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.3);
+    border: var(--border-thin) solid var(--bronze-border);
+    border-radius: 4px;
+    min-width: 150px;
+}
+
+.stat-label-large {
+    font-weight: 600;
+    color: var(--ink-primary);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+.stat-value-large {
+    font-family: var(--font-mono);
+    color: var(--seal-red);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+.page-info {
+    font-family: var(--font-mono);
+    color: var(--ink-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 表格底部统计行样式 */
+.table-summary {
+    border-top: var(--border-thick) solid var(--gold-accent);
+}
+
+.summary-row {
+    background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
+    font-weight: 700;
+}
+
+.summary-label {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--ink-primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.summary-amount {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--seal-red);
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    border-left: var(--border-thin) solid var(--bronze-border);
+    border-right: var(--border-thin) solid var(--bronze-border);
+}
+
+.summary-row td {
+    padding: var(--space-md);
+    border-top: var(--border-medium) solid var(--bronze-border);
+}
+
+/* 打印样式中的统计行 */
+@media print {
+    .table-summary {
+        border-top: 2px solid #000;
+    }
+    
+    .summary-row {
+        background: #f9f9f9;
+    }
+    
+    .summary-label {
+        font-weight: bold;
+        text-align: center;
+        background: #f5f5f5;
+    }
+    
+    .summary-amount {
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+        background: #ffffff;
+    }
+}
+
+/* 横向统计信息栏 */
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--space-xl) 0 var(--space-lg);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
+    border: var(--border-medium) solid var(--bronze-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 16px var(--shadow-light);
+}
+
+.stat-item-left,
+.stat-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    min-width: 150px;
+}
+
+.stat-item-left {
+    border-right: var(--border-thin) solid var(--bronze-border);
+    margin-right: var(--space-lg);
+}
+
+.stat-label {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+    letter-spacing: 0.02em;
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--seal-red);
+    letter-spacing: 0.05em;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    border: var(--border-thin) solid var(--bronze-border);
+}
+
+/* 响应式统计栏 */
+@media (max-width: 768px) {
+    .stats-bar {
+        flex-direction: column;
+        gap: var(--space-md);
+        padding: var(--space-md);
+    }
+    
+    .stat-item-left {
+        border-right: none;
+        border-bottom: var(--border-thin) solid var(--bronze-border);
+        margin-right: 0;
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-md);
+    }
+    
+    .stat-item-left,
+    .stat-item-right {
+        min-width: 120px;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-bar {
+        margin: var(--space-md) 0;
+        padding: var(--space-sm);
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .stat-value {
+        font-size: 1.1rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
+
+
+
+/* 优化栏宽比例的统计样式 */
+.table-summary {
+    border-top: var(--border-thick) solid var(--gold-accent);
+}
+
+.summary-row {
+    background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
+}
+
+.summary-header {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: rgba(255, 255, 255, 0.3);
+    border-right: var(--border-thin) solid var(--bronze-border);
+    width: 20%;
+    min-width: 80px;
+}
+
+.summary-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--seal-red);
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-right: var(--border-thin) solid var(--bronze-border);
+    width: 30%;
+    min-width: 120px;
+}
+
+.summary-row th[colspan="2"] {
+    background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
+    border-right: var(--border-thin) solid var(--bronze-border);
+    width: 25%;
+    min-width: 100px;
+}
+
+.summary-row th,
+.summary-row td {
+    padding: var(--space-md);
+    border-top: var(--border-medium) solid var(--bronze-border);
+    vertical-align: middle;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 打印样式中的合并列 */
+@media print {
+    .table-summary {
+        border-top: 2px solid #000;
+    }
+    
+    .summary-row {
+        background: #f9f9f9;
+    }
+    
+    .summary-header {
+        font-weight: bold;
+        text-align: center;
+        background: #f5f5f5;
+        border-right: 1px solid #000;
+    }
+    
+    .summary-value {
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+        background: #ffffff;
+        border-right: 1px solid #000;
+        width: 50%;
+        min-width: 150px;
+    }
+    
+    .summary-row th,
+    .summary-row td {
+        padding: 6px 4px;
+        border: 1px solid #000;
+        font-size: 9pt;
+    }
+    
+    .summary-row th[colspan="2"] {
+        background: #f5f5f5;
+        border-right: 1px solid #000;
+    }
+}
+
+/* 垂直堆叠表格容器 */
+.tables-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin: var(--space-lg) 0;
+}
+
+/* 表格区块样式 */
+.table-section {
+    background: var(--archive-paper);
+    border: var(--border-medium) solid var(--bronze-border);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    overflow: hidden;
+    break-inside: avoid;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 简化的导航控制 */
+.navigation-controls.simplified {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.3);
+    border: var(--border-thin) solid var(--bronze-border);
+    border-radius: 4px;
+}
+
+.nav-btn {
+    padding: var(--space-sm) var(--space-md);
+    border: var(--border-thin) solid var(--bronze-border);
+    background: var(--archive-paper);
+    color: var(--ink-primary);
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-btn:hover {
+    background: var(--archive-paper-dark);
+    border-color: var(--seal-red);
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 删除按钮样式 */
+.btn-danger {
+    background: rgba(200, 16, 46, 0.1);
+    border-color: var(--seal-red);
+    color: var(--seal-red);
+}
+
+.btn-danger:hover {
+    background: var(--seal-red);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+}
+
+/* 控制面板 */
+.control-panel {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    z-index: 100;
+}
+
+.btn {
+    padding: var(--space-md) var(--space-lg);
+    border: var(--border-thin) solid var(--bronze-border);
+    background: var(--archive-paper);
+    color: var(--ink-primary);
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--shadow-medium);
+    border-color: var(--seal-red);
+}
+
+.btn-primary {
+    background: var(--seal-red);
+    color: white;
+    border-color: var(--seal-red);
+}
+
+.btn-primary:hover {
+    background: #A00D26;
+    border-color: #A00D26;
+}
+
+.btn-secondary:hover {
+    background: var(--archive-paper-dark);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: var(--space-sm);
+    }
+    
+    .archive-container {
+        margin: 0;
+        border-width: var(--border-thin);
+    }
+    
+    .archive-header,
+    .archive-content,
+    .archive-footer {
+        padding: var(--space-lg);
+    }
+    
+    .archive-title {
+        font-size: 2rem;
+    }
+    
+    .archive-meta {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .archive-footer {
+        padding: var(--space-md);
+    }
+    
+    .total-label {
+        font-size: 1rem;
+        padding-right: var(--space-md);
+    }
+    
+    .total-amount {
+        font-size: 1.1rem;
+    }
+    
+    .page-info {
+        text-align: center;
+    }
+    
+    .control-panel {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: var(--space-lg);
+        gap: var(--space-sm);
+    }
+    
+    .btn {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.8rem;
+    }
+    
+    .record-table {
+        font-size: 0.8rem;
+    }
+    
+    .record-table th,
+    .record-table td {
+        padding: var(--space-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .record-table-container {
+        overflow-x: scroll;
+    }
+    
+    .record-table {
+        min-width: 400px;
+    }
+    
+    .col-name { width: 120px; }
+    .col-amount-capital { width: 150px; }
+    .col-amount { width: 100px; }
+    .col-gift { width: 120px; }
+}
+
+/* 打印样式 - 垂直堆叠布局优化 */
+    @media print {
+        /* 基础设置 - 优化纸张利用 */
+        @page {
+            margin: 10mm;
+            size: A4 landscape;
+        }
+        
+        /* 适配不同纸张尺寸和方向 */
+        @page :left {
+            margin: 10mm;
+        }
+        
+        @page :right {
+            margin: 10mm;
+        }
+        
+        /* 基础样式重置 */
+        body {
+            background: white;
+            padding: 0;
+            margin: 0;
+            font-family: var(--font-serif);
+            font-size: 12pt;
+            line-height: 1.5;
+        }
+        
+        /* 隐藏所有UI元素 */
+        .archive-header,
+        .archive-footer,
+        .control-panel,
+        .page-info,
+        .navigation-controls,
+        .nav-btn,
+        .page-select,
+        .btn {
+            display: none !important;
+        }
+        
+        /* 容器设置 - 确保全屏利用 */
+        .archive-container,
+        .archive-content {
+            box-shadow: none;
+            border: none;
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* 垂直堆叠表格打印样式 - 确保每页一个表格 */
+        .tables-container {
+            gap: 0;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: auto;
+        }
+        
+        /* 关键设置：确保每个表格区块单独一页并填满页面 */
+        .table-section {
+            break-inside: avoid !important;
+            page-break-after: always !important;
+            page-break-before: auto;
+            page-break-inside: avoid !important;
+            width: 100% !important;
+            min-height: calc(100vh - 20mm) !important;
+            height: calc(100vh - 20mm) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block;
+            position: relative;
+        }
+        
+        /* 最后一页不添加分页符 */
+        .table-section:last-child {
+            page-break-after: avoid !important;
+        }
+        
+        /* 表格容器 - 填满可用空间 */
+        .record-table-container {
+            overflow: visible;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+        }
+        
+        /* 表格设置 - 填满页面 */
+        .record-table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin: 0 !important;
+            font-size: 12pt !important;
+            table-layout: fixed !important;
+            page-break-inside: avoid !important;
+            height: 100% !important;
+        }
+        
+        /* 确保表格结构完整 */
+        .record-table thead,
+        .record-table tbody,
+        .record-table tfoot {
+            display: table-row-group !important;
+        }
+        
+        /* 表头固定高度 */
+        .record-table thead {
+            height: 50px;
+        }
+        
+        /* 表体自适应高度 */
+        .record-table tbody {
+            height: calc(100% - 100px) !important;
+        }
+        
+        /* 表尾固定高度 */
+        .record-table tfoot {
+            height: 50px;
+        }
+        
+        /* 表格单元格基础样式 - 与网页显示一致 */
+        .record-table th {
+            display: table-cell !important;
+            padding: 8px 12px !important;
+            border: 1px solid #000 !important;
+            font-family: var(--font-serif);
+            font-size: 12pt !important;
+            font-weight: bold;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            vertical-align: middle !important;
+            text-align: center;
+            background: #f5f5f5;
+            color: #000;
+        }
+        
+        .record-table td {
+            display: table-cell !important;
+            padding: 8px 12px !important;
+            border: 1px solid #000 !important;
+            font-family: var(--font-handwriting);
+            font-size: 12pt !important;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            vertical-align: middle !important;
+            text-align: center;
+        }
+        
+        /* 金额列特殊样式 - 黑体加粗 */
+        .record-table td.col-amount,
+        .record-table td.summary-value,
+        .record-table td.col-amount input,
+        .record-table td.summary-value input {
+            font-family: SimHei !important;
+            font-weight: bold !important;
+        }
+        
+        /* 确保金额大写列也使用黑体加粗 */
+        .record-table td.col-amount-capital,
+        .record-table td.col-amount-capital input {
+            font-family: SimHei !important;
+            font-weight: bold !important;
+        }
+        
+        /* 统一列宽设置 - 确保完美对齐 */
+        .col-name,
+        .summary-row th:nth-child(1),
+        .summary-row th:nth-child(3) {
+            width: 25% !important;
+            min-width: 150px !important;
+        }
+        
+        .col-amount-capital,
+        .summary-row td:nth-child(2) {
+            width: 35% !important;
+            min-width: 200px !important;
+        }
+        
+        .col-amount,
+        .summary-row td:nth-child(4) {
+            width: 15% !important;
+            min-width: 120px !important;
+        }
+        
+        .col-gift {
+            width: 25% !important;
+            min-width: 150px !important;
+        }
+        
+        /* 数据行高度均匀分布 - 8行 */
+        .record-table tbody tr {
+            height: calc((100% - 100px) / 8) !important;
+            min-height: 40px !important;
+        }
+        
+        /* 输入框样式 - 使用手写字体，与网页显示一致 */
+        .record-table input {
+            font-family: var(--font-handwriting);
+            font-size: 12pt !important;
+            border: none;
+            background: transparent;
+            width: 100% !important;
+            height: 100% !important;
+            padding: 4px !important;
+            margin: 0 !important;
+            color: #000;
+        }
+        
+        /* 页脚样式 - 与网页显示一致 */
+        .table-summary {
+            display: table-row-group !important;
+            border-top: 2px solid #000 !important;
+        }
+        
+        .summary-row {
+            display: table-row !important;
+        }
+        
+        .summary-header {
+            padding: 12px 8px !important;
+            border: 1px solid #000 !important;
+            font-family: var(--font-serif);
+            font-size: 12pt !important;
+            font-weight: bold;
+            vertical-align: middle !important;
+            text-align: center;
+            height: 50px !important;
+        }
+        
+        .summary-value {
+            padding: 12px 8px !important;
+            border: 1px solid #000 !important;
+            font-family: var(--font-handwriting);
+            font-size: 12pt !important;
+            font-weight: bold;
+            vertical-align: middle !important;
+            text-align: center;
+            height: 50px !important;
+        }
+        
+        /* 移除装饰效果 */
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+        
+        /* 确保无额外间距 */
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+    
+    /* 适配不同纸张尺寸 - 横向 */
+    @media print and (size: A4 landscape) {
+        @page {
+            size: A4 landscape;
+        }
+        
+        .table-section {
+            min-height: calc(100vh - 20mm) !important;
+            height: calc(100vh - 20mm) !important;
+        }
+    }
+    
+    @media print and (size: Letter landscape) {
+        @page {
+            size: Letter landscape;
+        }
+        
+        .table-section {
+            min-height: calc(100vh - 20mm) !important;
+            height: calc(100vh - 20mm) !important;
+        }
+    }
+    
+    /* 适配纵向打印 */
+    @media print and (orientation: portrait) {
+        @page {
+            size: A4 portrait;
+        }
+        
+        .table-section {
+            min-height: calc(100vh - 20mm) !important;
+            height: calc(100vh - 20mm) !important;
+        }
+        
+        /* 调整列宽以适应纵向布局 */
+        .col-name,
+        .summary-row th:nth-child(1),
+        .summary-row th:nth-child(3) {
+            width: 30% !important;
+        }
+        
+        .col-amount-capital,
+        .summary-row td:nth-child(2) {
+            width: 30% !important;
+        }
+        
+        .col-amount,
+        .summary-row td:nth-child(4) {
+            width: 20% !important;
+        }
+        
+        .col-gift {
+            width: 20% !important;
+        }
+    }
+
+/* 特殊效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.archive-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 古籍印章效果 */
+.seal-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.seal-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--seal-red);
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: -1;
+}

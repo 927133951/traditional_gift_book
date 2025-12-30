@@ -1,0 +1,266 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SimSun', '宋体', serif;
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #e74c3c;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.controls button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.controls button:hover {
+    background-color: #c0392b;
+}
+
+/* A4页面样式 - 横向 */
+.a4-page {
+    width: 297mm;
+    height: 210mm;
+    background: white;
+    margin: 0 auto 30px;
+    padding: 15mm;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    page-break-after: always;
+    position: relative;
+    border: 3px solid #e74c3c;
+}
+
+.a4-page:last-child {
+    page-break-after: avoid;
+}
+
+/* 礼薄标题 */
+.book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15mm;
+    padding-bottom: 5mm;
+    border-bottom: 3px solid #e74c3c;
+}
+
+.book-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #e74c3c;
+    font-family: 'SimSun', '宋体', serif;
+}
+
+.page-number {
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: bold;
+    font-family: 'SimSun', '宋体', serif;
+}
+
+/* 表格样式 */
+.gift-table {
+    width: 100%;
+    height: calc(100% - 40mm);
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+/* 所有单元格边框 */
+.gift-table th,
+.gift-table td {
+    border: 2px solid #e74c3c;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    min-height: 40px;
+}
+
+/* 分类标题行 */
+.category-header {
+    background-color: white;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 14px;
+    width: 60px;
+}
+
+/* 序号列 */
+.serial-number {
+    background-color: white;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 14px;
+    width: 80px;
+}
+
+/* 摘要标题列 */
+.summary-header {
+    background-color: white;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 14px;
+    width: 100px;
+}
+
+/* 数据标签列 */
+.data-label {
+    background-color: white;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    width: 60px;
+}
+
+/* 输入框样式 */
+.gift-table input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: 'SimSun', '宋体', serif;
+    font-size: 14px;
+    background: transparent;
+    color: #000;
+    padding: 5px;
+}
+
+/* 输入框占位符 */
+.gift-table input::placeholder {
+    color: #bdc3c7;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* 金额大写样式 */
+.amount-capital {
+    font-family: 'SimSun', '宋体', serif;
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 14px;
+    background-color: white;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* 金额显示样式 */
+.amount-display {
+    font-family: 'SimSun', '宋体', serif;
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 14px;
+    background-color: white;
+}
+
+/* 页小计和累计总计样式 */
+.page-total-capital,
+.grand-total-capital,
+.page-total-amount,
+.grand-total-amount {
+    font-family: 'SimSun', '宋体', serif;
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 16px;
+    background-color: white;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* 打印样式 */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    header {
+        display: none;
+    }
+    
+    .a4-page {
+        box-shadow: none;
+        margin: 0 auto;
+        padding: 15mm;
+        width: 297mm;
+        height: 210mm;
+        border: 3px solid #e74c3c;
+    }
+    
+    .gift-table {
+        page-break-inside: avoid;
+    }
+    
+    .gift-table input {
+        border: none;
+        background: transparent;
+    }
+    
+    .gift-table input:focus {
+        background: transparent;
+        outline: none;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .a4-page {
+        transform: scale(0.8);
+        transform-origin: top center;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "electronic-gift-book",
+  "version": "1.0.0",
+  "description": "Traditional Chinese Electronic Gift Book",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "watch": "nodemon --exec npm test"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
