@@ -199,12 +199,22 @@ body {
     table-layout: fixed;
 }
 
+/* 表格样式基础设置 */
 .record-table th,
 .record-table td {
     padding: var(--space-md);
     text-align: left;
-    border: var(--border-thin) solid var(--bronze-border);
     vertical-align: middle;
+}
+
+/* 普通表格线条 - 适度加粗 */
+.record-table td {
+    border: var(--border-medium) solid var(--bronze-border);
+}
+
+/* 表头表格线条 - 更粗，形成视觉区分 */
+.record-table th {
+    border: var(--border-thick) solid var(--bronze-border);
 }
 
 .record-table th {
@@ -498,7 +508,8 @@ body {
     font-weight: 700;
     letter-spacing: 0.02em;
     background: rgba(255, 255, 255, 0.3);
-    border-right: var(--border-thin) solid var(--bronze-border);
+    border: var(--border-medium) solid var(--bronze-border);
+    border-top: var(--border-thick) solid var(--bronze-border);
     width: 20%;
     min-width: 80px;
 }
@@ -511,14 +522,16 @@ body {
     letter-spacing: 0.05em;
     text-align: center;
     background: rgba(255, 255, 255, 0.5);
-    border-right: var(--border-thin) solid var(--bronze-border);
+    border: var(--border-medium) solid var(--bronze-border);
+    border-top: var(--border-thick) solid var(--bronze-border);
     width: 30%;
     min-width: 120px;
 }
 
 .summary-row th[colspan="2"] {
     background: linear-gradient(135deg, var(--archive-paper-dark), var(--archive-paper));
-    border-right: var(--border-thin) solid var(--bronze-border);
+    border: var(--border-medium) solid var(--bronze-border);
+    border-top: var(--border-thick) solid var(--bronze-border);
     width: 25%;
     min-width: 100px;
 }
@@ -526,7 +539,6 @@ body {
 .summary-row th,
 .summary-row td {
     padding: var(--space-md);
-    border-top: var(--border-medium) solid var(--bronze-border);
     vertical-align: middle;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -911,7 +923,7 @@ body {
         .record-table th {
             display: table-cell !important;
             padding: 8px 12px !important;
-            border: 1px solid #000 !important;
+            border: 3px solid #000 !important; /* 表头边框更粗，形成视觉区分 */
             font-family: var(--font-serif);
             font-size: 12pt !important;
             font-weight: bold;
@@ -926,7 +938,7 @@ body {
         .record-table td {
             display: table-cell !important;
             padding: 8px 12px !important;
-            border: 1px solid #000 !important;
+            border: 2px solid #000 !important; /* 普通表格线条适度加粗 */
             font-family: var(--font-handwriting);
             font-size: 12pt !important;
             word-wrap: break-word;
@@ -998,7 +1010,7 @@ body {
         /* 页脚样式 - 与网页显示一致 */
         .table-summary {
             display: table-row-group !important;
-            border-top: 2px solid #000 !important;
+            border-top: 3px solid #000 !important;
         }
         
         .summary-row {
@@ -1007,7 +1019,8 @@ body {
         
         .summary-header {
             padding: 12px 8px !important;
-            border: 1px solid #000 !important;
+            border: 2px solid #000 !important;
+            border-top: 3px solid #000 !important;
             font-family: var(--font-serif);
             font-size: 12pt !important;
             font-weight: bold;
@@ -1018,7 +1031,8 @@ body {
         
         .summary-value {
             padding: 12px 8px !important;
-            border: 1px solid #000 !important;
+            border: 2px solid #000 !important;
+            border-top: 3px solid #000 !important;
             font-family: var(--font-handwriting);
             font-size: 12pt !important;
             font-weight: bold;
