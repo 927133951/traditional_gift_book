@@ -1073,20 +1073,9 @@ body {
     }
     
     /* 适配不同纸张尺寸 - 横向 */
-    @media print and (size: A4 landscape) {
+    @media print and (orientation: landscape) {
         @page {
             size: A4 landscape;
-        }
-        
-        .table-section {
-            min-height: calc(100vh - 20mm) !important;
-            height: calc(100vh - 20mm) !important;
-        }
-    }
-    
-    @media print and (size: Letter landscape) {
-        @page {
-            size: Letter landscape;
         }
         
         .table-section {
