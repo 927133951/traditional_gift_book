@@ -253,10 +253,11 @@ body {
 }
 
 /* 表格列宽设置 - 确保总和为100% */
-.col-name { width: 25%; min-width: 150px; }
-.col-amount-capital { width: 35%; min-width: 200px; }
+.col-name { width: 20%; min-width: 120px; }
 .col-amount { width: 15%; min-width: 120px; }
-.col-gift { width: 25%; min-width: 150px; }
+.col-amount-capital { width: 25%; min-width: 150px; }
+.col-gift { width: 15%; min-width: 120px; }
+.col-address { width: 25%; min-width: 150px; }
 
 /* 手写行楷体样式 - 所有用户输入 */
 .record-table input,
@@ -979,24 +980,28 @@ body {
         /* 统一列宽设置 - 确保完美对齐 */
         .col-name,
         .summary-row th:nth-child(1),
-        .summary-row th:nth-child(3) {
-            width: 25% !important;
-            min-width: 150px !important;
+        .summary-row th:nth-child(4) {
+            width: 20% !important;
+            min-width: 120px !important;
         }
         
-        .col-amount-capital,
-        .summary-row td:nth-child(2) {
-            width: 35% !important;
-            min-width: 200px !important;
-        }
-        
-        .col-amount,
-        .summary-row td:nth-child(4) {
+        .col-amount {
             width: 15% !important;
             min-width: 120px !important;
         }
         
+        .col-amount-capital,
+        .summary-row td:nth-child(3) {
+            width: 25% !important;
+            min-width: 150px !important;
+        }
+        
         .col-gift {
+            width: 15% !important;
+            min-width: 120px !important;
+        }
+        
+        .col-address {
             width: 25% !important;
             min-width: 150px !important;
         }
@@ -1104,22 +1109,25 @@ body {
         /* 调整列宽以适应纵向布局 */
         .col-name,
         .summary-row th:nth-child(1),
-        .summary-row th:nth-child(3) {
-            width: 30% !important;
+        .summary-row th:nth-child(4) {
+            width: 20% !important;
+        }
+        
+        .col-amount {
+            width: 15% !important;
         }
         
         .col-amount-capital,
-        .summary-row td:nth-child(2) {
-            width: 30% !important;
-        }
-        
-        .col-amount,
-        .summary-row td:nth-child(4) {
-            width: 20% !important;
+        .summary-row td:nth-child(3) {
+            width: 25% !important;
         }
         
         .col-gift {
-            width: 20% !important;
+            width: 15% !important;
+        }
+        
+        .col-address {
+            width: 25% !important;
         }
     }
 

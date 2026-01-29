@@ -81,9 +81,10 @@ class GiftArchive {
             <thead>
                 <tr>
                     <th class="col-name">宾客姓名</th>
-                    <th class="col-amount-capital">礼金大写</th>
                     <th class="col-amount">礼金</th>
+                    <th class="col-amount-capital">礼金大写</th>
                     <th class="col-gift">礼品</th>
+                    <th class="col-address">地址</th>
                 </tr>
             </thead>
             <tbody class="table-body" data-page="${pageNumber}">
@@ -92,7 +93,7 @@ class GiftArchive {
             <tfoot class="table-summary">
                 <tr class="summary-row">
                     <th class="summary-header">本页小计</th>
-                    <td class="summary-value" data-page="${pageNumber}" data-type="pageTotal">¥0.00</td>
+                    <td colspan="2" class="summary-value" data-page="${pageNumber}" data-type="pageTotal">¥0.00</td>
                     <th class="summary-header">总计</th>
                     <td class="summary-value" data-type="grandTotal">¥0.00</td>
                 </tr>
@@ -120,17 +121,21 @@ class GiftArchive {
                 <input type="text" class="record-input" data-field="name" data-index="${actualIndex}"
                        placeholder="请输入宾客姓名">
             </td>
-            <td class="col-amount-capital">
-                <input type="text" class="record-input" data-field="amountCapital" data-index="${actualIndex}"
-                       placeholder="自动转换大写金额" readonly>
-            </td>
             <td class="col-amount">
                 <input type="number" class="record-input" data-field="amount" data-index="${actualIndex}"
                        placeholder="0.00" step="0.01" min="0">
             </td>
+            <td class="col-amount-capital">
+                <input type="text" class="record-input" data-field="amountCapital" data-index="${actualIndex}"
+                       placeholder="自动转换大写金额" readonly>
+            </td>
             <td class="col-gift">
                 <input type="text" class="record-input" data-field="gift" data-index="${actualIndex}"
                        placeholder="请输入礼品">
+            </td>
+            <td class="col-address">
+                <input type="text" class="record-input" data-field="address" data-index="${actualIndex}"
+                       placeholder="请输入地址">
             </td>
         `;
 
@@ -552,6 +557,7 @@ class GiftArchive {
             const recordIndex = newPageStart + i;
             this.archiveData.records[recordIndex] = {
                 name: '',
+                address: '',
                 amount: '',
                 amountCapital: '',
                 gift: ''
@@ -732,9 +738,10 @@ class GiftArchive {
         content += '<table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">';
         content += '<thead><tr>';
         content += '<th style="padding: 8px;">宾客姓名</th>';
-        content += '<th style="padding: 8px;">礼金大写</th>';
         content += '<th style="padding: 8px;">礼金</th>';
+        content += '<th style="padding: 8px;">礼金大写</th>';
         content += '<th style="padding: 8px;">礼品</th>';
+        content += '<th style="padding: 8px;">地址</th>';
         content += '</tr></thead><tbody>';
 
         const records = this.archiveData.records || {};
@@ -742,9 +749,10 @@ class GiftArchive {
             const record = records[key];
             content += '<tr>';
             content += `<td style="padding: 8px;">${record.name || ''}</td>`;
-            content += `<td style="padding: 8px;">${record.amountCapital || ''}</td>`;
             content += `<td style="padding: 8px;">${record.amount || ''}</td>`;
+            content += `<td style="padding: 8px;">${record.amountCapital || ''}</td>`;
             content += `<td style="padding: 8px;">${record.gift || ''}</td>`;
+            content += `<td style="padding: 8px;">${record.address || ''}</td>`;
             content += '</tr>';
         });
 
@@ -824,6 +832,7 @@ class GiftArchive {
             for (let i = 0; i < this.recordsPerPage; i++) {
                 this.archiveData.records[i] = {
                     name: '',
+                    address: '',
                     amount: '',
                     amountCapital: '',
                     gift: ''
